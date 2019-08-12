@@ -2,8 +2,9 @@
  * Created by hao.cheng on 2017/4/16.
  */
 import React from 'react';
-import { Button, Row, Card, Form, Input, Select } from 'antd';
+import { Button, Row, Card, Form, Input, Select, notification } from 'antd';
 import BreadcrumbCustom from '../BreadcrumbCustom';
+import { addPrivateLotteryResult } from '../../axios';
 
 const FormItem = Form.Item;
 const { Option } = Select;
@@ -13,11 +14,30 @@ class AddPrivateLotteryResult extends React.Component {
         loading: false,
     };
 
+    openNotificationWithIcon = (type, message, description) => {
+        notification[type]({
+            message: message,
+            description: description,
+        });
+    };
+
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFieldsAndScroll((err, values) => {
             if (!err) {
+                this.setState({ loading: true });
                 console.log('Received values of form: ', values);
+                addPrivateLotteryResult(values).then(({ code, message }) => {
+                    this.setState({
+                        loading: false,
+                    });
+                    if (code == 0) {
+                        this.props.form.resetFields();
+                        this.openNotificationWithIcon('success', '添加成功', '成功添加开奖结果.');
+                    } else {
+                        this.openNotificationWithIcon('error', '添加失败', message);
+                    }
+                });
             }
         });
     };
@@ -56,47 +76,46 @@ class AddPrivateLotteryResult extends React.Component {
                                 <FormItem
                                     {...formItemLayout}
                                     label="彩票"
-                                    hasFeedback
                                 >
                                     {getFieldDecorator('lotteryType', {
                                         rules: [{
                                             required: true, message: '请选择彩票!',
                                         }],
                                     })(
-                                        <Select defaultValue="nk3">
-                                            <Option value="nk3">nk3</Option>
-                                            <Option value="lucy">Lucy</Option>
+                                        <Select placeholder="请选择彩票类型">
+                                            <Option value="nk3">新快3</Option>
+                                            <Option value="npk10">新pk10</Option>
+                                            <Option value="n11x5">新11选5</Option>
                                         </Select>,
                                     )}
                                 </FormItem>
                                 <FormItem
                                     {...formItemLayout}
                                     label="开奖期数"
-                                    extra={'例如：20190808001'}
                                 >
                                     {getFieldDecorator('no', {
                                         rules: [{
                                             required: true, message: '请输入开奖期数!',
                                         }],
                                     })(
-                                        <Input />,
+                                        <Input placeHolder={'请输入开奖期数，例如：20190808001'} />,
                                     )}
                                 </FormItem>
                                 <FormItem
                                     {...formItemLayout}
                                     label="开奖号码"
-                                    extra={'例如快3开奖号码为：1,2,3'}
                                 >
                                     {getFieldDecorator('result', {
                                         rules: [{
-                                            required: true, message: '请确认开奖结果，以,分割!',
+                                            required: true, message: '请确认开奖结果，以英文,分割!',
                                         }],
                                     })(
-                                        <Input />,
+                                        <Input placeHolder={'请输入开奖结果，例如快3开奖号码为：1,2,3'} />,
                                     )}
                                 </FormItem>
                                 <FormItem {...tailFormItemLayout}>
-                                    <Button type="primary" htmlType="submit" size="large">添加</Button>
+                                    <Button type="primary" htmlType="submit" size="large"
+                                            loading={this.state.loading}>添加</Button>
                                 </FormItem>
                             </Form>
                         </Card>

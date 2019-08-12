@@ -17,7 +17,8 @@ export default {
             icon: 'user',
             subs: [
                 { key: '/app/lottery/lottery', title: '彩票管理', component: 'Lottery' },
-                { key: '/app/lottery/privateLottery', title: '私彩开奖', component: 'PrivateLottery' },
+                { key: '/app/lottery/lotteryResults', title: '彩票开奖', component: 'LotteryResults' },
+                { key: '/app/lottery/privateLotteryResults', title: '私彩计划', component: 'PrivateLotteryResults' },
             ],
         },
         {

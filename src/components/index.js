@@ -30,7 +30,8 @@ import QueryParams from './extension/QueryParams';
 import User from './user/User';
 import Agent from './user/Agent';
 import Lottery from './lottery/Lottery';
-import PrivateLottery from './lottery/PrivateLottery';
+import LotteryResults from './lottery/LotteryResults';
+import PrivateLotteryResults from './lottery/PrivateLotteryResults';
 import AddPrivateLotteryResult from './lottery/AddPrivateLotteryResult';
 
 const WysiwygBundle = Loadable({
@@ -67,6 +68,7 @@ export default {
     User,
     Agent,
     Lottery,
-    PrivateLottery,
+    LotteryResults,
+    PrivateLotteryResults,
     AddPrivateLotteryResult,
 };

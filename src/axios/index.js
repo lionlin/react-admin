@@ -27,6 +27,17 @@ export const listLotteryResults = (pageNo, pageSize) => get({
     headers: { 'token': 'fadeToken' },
 });
 
+export const listPrivateLotteryResults = (pageNo, pageSize) => get({
+    url: `/listPrivateLotteryResults?pageSize=${pageSize}&pageNo=${pageNo}`,
+    headers: { 'token': 'fadeToken' },
+});
+
+export const addPrivateLotteryResult = (values) => post({
+    url: `/addPrivateLotteryResult`,
+    data: values,
+    headers: { 'token': 'fadeToken' },
+});
+
 export const npmDependencies = () =>
     axios
         .get('./npm.json')

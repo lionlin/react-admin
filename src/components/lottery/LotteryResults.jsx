@@ -34,7 +34,7 @@ const columns = [{
     width: 200,
 }];
 
-class PrivateLottery extends React.Component {
+class LotteryResults extends React.Component {
     state = {
         data: [],
         pageNo: 1,
@@ -70,11 +70,11 @@ class PrivateLottery extends React.Component {
         const { pageNo, pageSize, total } = this.state;
         return (
             <div className="gutter-example">
-                <BreadcrumbCustom first="彩票管理" second="私彩" />
+                <BreadcrumbCustom first="彩票管理" second="彩票开奖" />
                 <Row gutter={16}>
                     <Col className="gutter-row" md={24}>
                         <div className="gutter-box">
-                            <Card title="私彩开奖" bordered={false}>
+                            <Card title="彩票开奖" bordered={false}>
                                 <div style={{ marginBottom: 16 }}>
                                     <Link to={'/app/lottery/privateLottery/add'}><Button type="primary">设置开奖</Button></Link>
                                 </div>
@@ -88,4 +88,4 @@ class PrivateLottery extends React.Component {
     }
 }
 
-export default PrivateLottery;
+export default LotteryResults;

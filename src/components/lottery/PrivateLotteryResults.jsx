@@ -3,39 +3,39 @@
  */
 import React from 'react';
 import { Table, Button, Row, Col, Card } from 'antd';
-import { listLotteryTypes } from '../../axios';
+import { listLotteryResults, listPrivateLotteryResults } from '../../axios';
 import BreadcrumbCustom from '../BreadcrumbCustom';
+import { Link } from 'react-router-dom';
 
 const columns = [{
-    title: '彩票简称',
+    title: '彩票',
     dataIndex: 'LotteryType',
+    width: 100,
+    // render: (text, record) => <a href={record.url} target="_blank" rel="noopener noreferrer">{text}</a>,
+}, {
+    title: '开奖期数',
+    dataIndex: 'No',
     width: 80,
 }, {
-    title: '彩票名称',
-    dataIndex: 'Name',
+    title: '开奖结果',
+    dataIndex: 'Result',
     width: 80,
 }, {
-    title: '彩票类型',
-    dataIndex: 'Kind',
-    width: 80,
-    render: (text) => <span>{text == 0 ? '官方' : '私有'}</span>,
+    title: '开奖时间',
+    dataIndex: 'PublishTime',
+    width: 200,
 }, {
-    title: '开始时间',
-    dataIndex: 'StartTime',
-    width: 80,
-}, {
-    title: '结束时间',
-    dataIndex: 'EndTime',
+    title: '下期期数',
+    dataIndex: 'NextNo',
     width: 80,
 }, {
-    title: '间隔时间',
-    dataIndex: 'Interval',
-    width: 80,
+    title: '下期开奖时间',
+    dataIndex: 'NextTime',
+    width: 200,
 }];
 
-class Lottery extends React.Component {
+class PrivateLotteryResults extends React.Component {
     state = {
-        loading: false,
         data: [],
         pageNo: 1,
         pageSize: 10,
@@ -47,46 +47,41 @@ class Lottery extends React.Component {
     }
 
     start = () => {
-        this.setState({ loading: true });
-        listLotteryTypes(this.state.pageNo, this.state.pageSize).then(({ data, total }) => {
+        listPrivateLotteryResults(this.state.pageNo, this.state.pageSize).then(({ data, total }) => {
             this.setState({
                 data: data,
-                loading: false,
                 total: total,
             });
         });
     };
 
     pagination = (pageNo) => {
-        this.setState({ pageNo: pageNo, loading: true });
+        this.setState({ pageNo: pageNo });
         console.log(pageNo);
-        listLotteryTypes(pageNo, this.state.pageSize).then(({ data, total }) => {
+        listPrivateLotteryResults(pageNo, this.state.pageSize).then(({ data, total }) => {
             this.setState({
                 data: data,
-                loading: false,
                 total: total,
             });
         });
     };
 
     render() {
-        const { pageNo, pageSize, total, loading } = this.state;
+        const { pageNo, pageSize, total } = this.state;
         return (
             <div className="gutter-example">
-                <BreadcrumbCustom first="彩票管理" second="彩票" />
+                <BreadcrumbCustom first="彩票管理" second="私彩" />
                 <Row gutter={16}>
                     <Col className="gutter-row" md={24}>
                         <div className="gutter-box">
-                            <Card title="彩票列表" bordered={false}>
+                            <Card title="私彩开奖" bordered={false}>
                                 <div style={{ marginBottom: 16 }}>
-                                    <Button type="primary" onClick={this.start}
-                                            disabled={loading} loading={loading}
-                                    >Reload</Button>
+                                    <Link to={'/app/lottery/privateLottery/add'}><Button
+                                        type="primary">设置开奖</Button></Link>
                                 </div>
                                 <Table columns={columns} dataSource={this.state.data} pagination={{
                                     pageNo: pageNo,
                                     pageSize: pageSize,
-                                    loading: loading,
                                     total: total,
                                     onChange: this.pagination,
                                 }} />
@@ -99,4 +94,4 @@ class Lottery extends React.Component {
     }
 }
 
-export default Lottery;
+export default PrivateLotteryResults;
