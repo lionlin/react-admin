@@ -7,6 +7,26 @@ import * as config from './config';
 
 export const getBbcNews = () => get({ url: config.NEWS_BBC });
 
+export const listUsers = (pageNo, pageSize) => get({
+    url: `/listUsers?pageSize=${pageSize}&pageNo=${pageNo}`,
+    headers: { 'token': 'fadeToken' },
+});
+
+export const listAgents = (pageNo, pageSize) => get({
+    url: `/listAgents?pageSize=${pageSize}&pageNo=${pageNo}`,
+    headers: { 'token': 'fadeToken' },
+});
+
+export const listLotteryTypes = (pageNo, pageSize) => get({
+    url: `/listLotteryTypes?pageSize=${pageSize}&pageNo=${pageNo}`,
+    headers: { 'token': 'fadeToken' },
+});
+
+export const listLotteryResults = (pageNo, pageSize) => get({
+    url: `/listLotteryResults?pageSize=${pageSize}&pageNo=${pageNo}`,
+    headers: { 'token': 'fadeToken' },
+});
+
 export const npmDependencies = () =>
     axios
         .get('./npm.json')
@@ -23,7 +43,7 @@ export const gitOauthLogin = () =>
     get({
         url: `${
             config.GIT_OAUTH
-        }/authorize?client_id=792cdcd244e98dcd2dee&redirect_uri=http://localhost:3006/&scope=user&state=reactAdmin`,
+            }/authorize?client_id=792cdcd244e98dcd2dee&redirect_uri=http://localhost:3006/&scope=user&state=reactAdmin`,
     });
 export const gitOauthToken = code =>
     post({

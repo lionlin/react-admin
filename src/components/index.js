@@ -27,6 +27,11 @@ import RouterEnter from './auth/RouterEnter';
 import Cssmodule from './cssmodule';
 import MapUi from './ui/map';
 import QueryParams from './extension/QueryParams';
+import User from './user/User';
+import Agent from './user/Agent';
+import Lottery from './lottery/Lottery';
+import PrivateLottery from './lottery/PrivateLottery';
+import AddPrivateLotteryResult from './lottery/AddPrivateLotteryResult';
 
 const WysiwygBundle = Loadable({
     // 按需加载富文本配置
@@ -59,4 +64,9 @@ export default {
     Cssmodule,
     MapUi,
     QueryParams,
+    User,
+    Agent,
+    Lottery,
+    PrivateLottery,
+    AddPrivateLotteryResult,
 };

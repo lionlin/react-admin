@@ -1,7 +1,25 @@
 export default {
     menus: [
         // 菜单相关路由
-        { key: '/app/dashboard/index', title: '首页', icon: 'mobile', component: 'Dashboard' },
+        { key: '/app/dashboard/index', title: '首页', icon: 'home', component: 'Dashboard' },
+        {
+            key: '/app/user',
+            title: '用户管理',
+            icon: 'user',
+            subs: [
+                { key: '/app/user/user', title: '用户管理', component: 'User' },
+                { key: '/app/user/agent', title: '代理管理', component: 'Agent' },
+            ],
+        },
+        {
+            key: '/app/lottery',
+            title: '彩票管理',
+            icon: 'user',
+            subs: [
+                { key: '/app/lottery/lottery', title: '彩票管理', component: 'Lottery' },
+                { key: '/app/lottery/privateLottery', title: '私彩开奖', component: 'PrivateLottery' },
+            ],
+        },
         {
             key: '/app/ui',
             title: 'UI',
@@ -106,5 +124,7 @@ export default {
             ],
         },
     ],
-    others: [], // 非菜单相关路由
+    others: [
+        { key: '/app/lottery/privateLottery/add', title: '设置开奖结果', component: 'AddPrivateLotteryResult' },
+    ], // 非菜单相关路由
 };
