@@ -31,8 +31,8 @@ import User from './user/User';
 import Agent from './user/Agent';
 import Lottery from './lottery/Lottery';
 import LotteryResults from './lottery/LotteryResults';
-import PrivateLotteryResults from './lottery/PrivateLotteryResults';
-import AddPrivateLotteryResult from './lottery/AddPrivateLotteryResult';
+import PreLotteryResults from './lottery/PreLotteryResults';
+import AddPreLotteryResult from './lottery/AddPreLotteryResult';
 
 const WysiwygBundle = Loadable({
     // 按需加载富文本配置
@@ -69,6 +69,6 @@ export default {
     Agent,
     Lottery,
     LotteryResults,
-    PrivateLotteryResults,
-    AddPrivateLotteryResult,
+    PreLotteryResults,
+    AddPreLotteryResult,
 };

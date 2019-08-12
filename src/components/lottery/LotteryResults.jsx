@@ -76,9 +76,18 @@ class LotteryResults extends React.Component {
                         <div className="gutter-box">
                             <Card title="彩票开奖" bordered={false}>
                                 <div style={{ marginBottom: 16 }}>
-                                    <Link to={'/app/lottery/privateLottery/add'}><Button type="primary">设置开奖</Button></Link>
+                                    <Link to={'/app/lottery/privateLottery/add'}><Button
+                                        type="primary">设置开奖</Button></Link>
                                 </div>
-                                <Table columns={columns} dataSource={this.state.data} pagination={{ pageNo: pageNo, pageSize: pageSize, total: total, onChange: this.pagination}} />
+                                <Table columns={columns} dataSource={this.state.data} pagination={{
+                                    pageNo: pageNo,
+                                    pageSize: pageSize,
+                                    total: total,
+                                    onChange: this.pagination,
+                                    showTotal: ((total) => {
+                                        return `共 ${total} 条`;
+                                    }),
+                                }} />
                             </Card>
                         </div>
                     </Col>

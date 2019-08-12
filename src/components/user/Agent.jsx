@@ -84,6 +84,9 @@ class Agent extends React.Component {
                                     loading: loading,
                                     total: total,
                                     onChange: this.pagination,
+                                    showTotal: ((total) => {
+                                        return `共 ${total} 条`;
+                                    }),
                                 }} />
                             </Card>
                         </div>

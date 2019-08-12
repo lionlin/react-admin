@@ -4,12 +4,12 @@
 import React from 'react';
 import { Button, Row, Card, Form, Input, Select, notification } from 'antd';
 import BreadcrumbCustom from '../BreadcrumbCustom';
-import { addPrivateLotteryResult } from '../../axios';
+import { addPreLotteryResult } from '../../axios';
 
 const FormItem = Form.Item;
 const { Option } = Select;
 
-class AddPrivateLotteryResult extends React.Component {
+class AddPreLotteryResult extends React.Component {
     state = {
         loading: false,
     };
@@ -27,11 +27,11 @@ class AddPrivateLotteryResult extends React.Component {
             if (!err) {
                 this.setState({ loading: true });
                 console.log('Received values of form: ', values);
-                addPrivateLotteryResult(values).then(({ code, message }) => {
+                addPreLotteryResult(values).then(({ code, message }) => {
                     this.setState({
                         loading: false,
                     });
-                    if (code == 0) {
+                    if (code === 0) {
                         this.props.form.resetFields();
                         this.openNotificationWithIcon('success', '添加成功', '成功添加开奖结果.');
                     } else {
@@ -126,4 +126,4 @@ class AddPrivateLotteryResult extends React.Component {
     }
 }
 
-export default Form.create()(AddPrivateLotteryResult);
+export default Form.create()(AddPreLotteryResult);

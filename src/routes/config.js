@@ -18,7 +18,7 @@ export default {
             subs: [
                 { key: '/app/lottery/lottery', title: '彩票管理', component: 'Lottery' },
                 { key: '/app/lottery/lotteryResults', title: '彩票开奖', component: 'LotteryResults' },
-                { key: '/app/lottery/privateLotteryResults', title: '私彩计划', component: 'PrivateLotteryResults' },
+                { key: '/app/lottery/preLotteryResults', title: '私彩计划', component: 'PreLotteryResults' },
             ],
         },
         {
@@ -126,6 +126,6 @@ export default {
         },
     ],
     others: [
-        { key: '/app/lottery/privateLottery/add', title: '设置开奖结果', component: 'AddPrivateLotteryResult' },
+        { key: '/app/lottery/preLottery/add', title: '设置开奖结果', component: 'AddPreLotteryResult' },
     ], // 非菜单相关路由
 };

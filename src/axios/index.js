@@ -32,8 +32,13 @@ export const listPrivateLotteryResults = (pageNo, pageSize) => get({
     headers: { 'token': 'fadeToken' },
 });
 
-export const addPrivateLotteryResult = (values) => post({
-    url: `/addPrivateLotteryResult`,
+export const listPreLotteryResults = (pageNo, pageSize) => get({
+    url: `/listPreLotteryResults?pageSize=${pageSize}&pageNo=${pageNo}`,
+    headers: { 'token': 'fadeToken' },
+});
+
+export const addPreLotteryResult = (values) => post({
+    url: `/addPreLotteryResult`,
     data: values,
     headers: { 'token': 'fadeToken' },
 });
