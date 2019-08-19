@@ -1,56 +1,52 @@
-/**
- * Created by hao.cheng on 2017/4/16.
- */
 import React from 'react';
-import { Table, Button, Row, Col, Card, Form, Select, Input } from 'antd';
-import { listPreLotteryResults } from '../../axios';
+import { Table, Button, Row, Col, Card, Form, Input } from 'antd';
+import { listWithdraws } from '../../axios';
 import BreadcrumbCustom from '../BreadcrumbCustom';
-import { Link } from 'react-router-dom';
-
-const { Option } = Select;
 
 const columns = [{
-    title: '彩票',
-    dataIndex: 'LotteryType',
-    width: 100,
-    // render: (text, record) => <a href={record.url} target="_blank" rel="noopener noreferrer">{text}</a>,
-}, {
-    title: '开奖期数',
-    dataIndex: 'No',
-    width: 80,
-}, , {
-    title: '开奖日期',
-    dataIndex: 'Date',
+    title: 'ID',
+    dataIndex: 'ID',
     width: 80,
 }, {
-    title: '开奖结果',
-    dataIndex: 'Result',
+    title: '账号',
+    dataIndex: 'User.Phone',
+    width: 80,
+}, {
+    title: '银行',
+    dataIndex: 'Bank',
+    width: 80,
+}, {
+    title: '银行账号',
+    dataIndex: 'BankCardNo',
+    width: 80,
+}, {
+    title: '持卡人',
+    dataIndex: 'Owner',
+    width: 80,
+}, {
+    title: '充值时间',
+    dataIndex: 'CreatedAt',
+    width: 80,
+}, {
+    title: '充值金额',
+    dataIndex: 'Amount',
     width: 80,
 }];
 
-class PreLotteryResults extends React.Component {
+class Withdraw extends React.Component {
     state = {
         data: [],
         pageNo: 1,
         pageSize: 10,
-        lotteryType: '',
+        phone: '',
         total: 0,
     };
 
     getFields() {
         const { getFieldDecorator } = this.props.form;
         const children = [
-            <Form.Item label={`彩票种类`}>
-                {getFieldDecorator(`lotteryType`, {})(
-                    <Select style={{ width: 200 }} placeholder="请选择彩票类型">
-                        <Option value="nk3">新快3</Option>
-                        <Option value="npk10">新pk10</Option>
-                        <Option value="n11x5">新11选5</Option>
-                    </Select>,
-                )}
-            </Form.Item>,
-            <Form.Item label={`彩票期号`}>
-                {getFieldDecorator(`lotteryNo`, {})(<Input style={{ width: 200 }} placeholder="请输入彩票期号" />)}
+            <Form.Item label={`手机号`}>
+                {getFieldDecorator(`phone`, {})(<Input style={{ width: 200 }} placeholder="请输入手机号" />)}
             </Form.Item>,
         ];
         return children;
@@ -59,12 +55,11 @@ class PreLotteryResults extends React.Component {
     handleSearch = e => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
-            console.log(values);
-            const lotteryType = values.lotteryType != undefined ? values.lotteryType : '';
+            const phone = values.phone != undefined ? values.phone : '';
             this.setState({
-                lotteryType: lotteryType,
+                phone: phone,
             });
-            this.start(this.state.pageNo, this.state.pageSize, lotteryType);
+            this.start(this.state.pageNo, this.state.pageSize, phone);
         });
     };
 
@@ -73,11 +68,11 @@ class PreLotteryResults extends React.Component {
     };
 
     componentDidMount() {
-        this.start(this.state.pageNo, this.state.pageSize, this.state.lotteryType);
+        this.start(this.state.pageNo, this.state.pageSize, this.state.phone);
     }
 
-    start = (pageNo, pageSize, lotteryType) => {
-        listPreLotteryResults(pageNo, pageSize, lotteryType).then(({ data, total }) => {
+    start = (pageNo, pageSize, phone) => {
+        listWithdraws(pageNo, pageSize, phone).then(({ data, total }) => {
             this.setState({
                 data: data,
                 total: total,
@@ -87,21 +82,19 @@ class PreLotteryResults extends React.Component {
 
     pagination = (pageNo) => {
         this.setState({ pageNo: pageNo });
-        this.start(pageNo, this.state.pageSize, this.state.lotteryType);
+        this.start(pageNo, this.state.pageSize, this.state.phone);
     };
 
     render() {
         const { pageNo, pageSize, total } = this.state;
         return (
             <div className="gutter-example">
-                <BreadcrumbCustom first="彩票管理" second="私彩" />
+                <BreadcrumbCustom first="充值提现" second="提现管理" />
                 <Row gutter={16}>
                     <Col className="gutter-row" md={24}>
                         <div className="gutter-box">
-                            <Card title="私彩开奖" bordered={false}>
+                            <Card title="提现列表" bordered={false}>
                                 <div style={{ marginBottom: 16 }}>
-                                    <Link to={'/app/lottery/preLottery/add'}><Button
-                                        type="primary">设置开奖</Button></Link>
                                     <Form layout="inline" className="ant-advanced-search-form"
                                           onSubmit={this.handleSearch}>
                                         <Row gutter={24}>{this.getFields()}</Row>
@@ -135,4 +128,4 @@ class PreLotteryResults extends React.Component {
     }
 }
 
-export default Form.create()(PreLotteryResults);
+export default Form.create()(Withdraw);

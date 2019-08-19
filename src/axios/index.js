@@ -22,8 +22,8 @@ export const listLotteryTypes = (pageNo, pageSize) => get({
     headers: { 'token': 'fadeToken' },
 });
 
-export const listLotteryResults = (pageNo, pageSize) => get({
-    url: `/listLotteryResults?pageSize=${pageSize}&pageNo=${pageNo}`,
+export const listLotteryResults = (pageNo, pageSize, lotteryType) => get({
+    url: `/listLotteryResults?pageSize=${pageSize}&pageNo=${pageNo}&lotteryType=${lotteryType}`,
     headers: { 'token': 'fadeToken' },
 });
 
@@ -32,14 +32,29 @@ export const listPrivateLotteryResults = (pageNo, pageSize) => get({
     headers: { 'token': 'fadeToken' },
 });
 
-export const listPreLotteryResults = (pageNo, pageSize) => get({
-    url: `/listPreLotteryResults?pageSize=${pageSize}&pageNo=${pageNo}`,
+export const listPreLotteryResults = (pageNo, pageSize, lotteryType) => get({
+    url: `/listPreLotteryResults?pageSize=${pageSize}&pageNo=${pageNo}&lotteryType=${lotteryType}`,
     headers: { 'token': 'fadeToken' },
 });
 
 export const addPreLotteryResult = (values) => post({
     url: `/addPreLotteryResult`,
     data: values,
+    headers: { 'token': 'fadeToken' },
+});
+
+export const listDeposits = (pageNo, pageSize, phone) => get({
+    url: `/listDeposits?pageSize=${pageSize}&pageNo=${pageNo}&phone=${phone}`,
+    headers: { 'token': 'fadeToken' },
+});
+
+export const listWithdraws = (pageNo, pageSize, phone) => get({
+    url: `/listWithdraws?pageSize=${pageSize}&pageNo=${pageNo}&phone=${phone}`,
+    headers: { 'token': 'fadeToken' },
+});
+
+export const listBets = (pageNo, pageSize, phone) => get({
+    url: `/listBets?pageSize=${pageSize}&pageNo=${pageNo}&phone=${phone}`,
     headers: { 'token': 'fadeToken' },
 });
 

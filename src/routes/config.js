@@ -14,11 +14,29 @@ export default {
         {
             key: '/app/lottery',
             title: '彩票管理',
-            icon: 'user',
+            icon: 'trophy',
             subs: [
                 { key: '/app/lottery/lottery', title: '彩票管理', component: 'Lottery' },
                 { key: '/app/lottery/lotteryResults', title: '彩票开奖', component: 'LotteryResults' },
                 { key: '/app/lottery/preLotteryResults', title: '私彩计划', component: 'PreLotteryResults' },
+            ],
+        },
+        {
+            key: '/app/asset',
+            title: '充值提现',
+            icon: 'bank',
+            subs: [
+                { key: '/app/asset/deposit', title: '充值管理', component: 'Deposit' },
+                { key: '/app/asset/withdraw', title: '提现管理', component: 'Withdraw' },
+            ],
+        },
+        {
+            key: '/app/bets',
+            title: '投注管理',
+            icon: 'wallet',
+            subs: [
+                { key: '/app/bets/statistic', title: '投注统计', component: 'Lottery' },
+                { key: '/app/bets/list', title: '投注明细', component: 'Bet' },
             ],
         },
         {
@@ -102,25 +120,6 @@ export default {
                     title: '路由拦截',
                     component: 'RouterEnter',
                     auth: 'auth/testPage',
-                },
-            ],
-        },
-        {
-            key: '/app/cssModule',
-            title: 'cssModule',
-            icon: 'star',
-            component: 'Cssmodule',
-        },
-        {
-            key: '/app/extension',
-            title: '功能扩展',
-            icon: 'bars',
-            subs: [
-                {
-                    key: '/app/extension/queryParams',
-                    title: '问号形式参数',
-                    component: 'QueryParams',
-                    query: '?param1=1&param2=2',
                 },
             ],
         },
