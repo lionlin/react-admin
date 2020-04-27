@@ -17,8 +17,8 @@ export const listAgents = (pageNo, pageSize) => get({
     headers: { 'token': 'fadeToken' },
 });
 
-export const listLotteryTypes = (pageNo, pageSize) => get({
-    url: `/listLotteryTypes?pageSize=${pageSize}&pageNo=${pageNo}`,
+export const listVedios = (pageNo, pageSize) => get({
+    url: `/listVedios?pageSize=${pageSize}&pageNo=${pageNo}`,
     headers: { 'token': 'fadeToken' },
 });
 
@@ -37,8 +37,8 @@ export const listPreLotteryResults = (pageNo, pageSize, lotteryType) => get({
     headers: { 'token': 'fadeToken' },
 });
 
-export const addPreLotteryResult = (values) => post({
-    url: `/addPreLotteryResult`,
+export const addVedio = (values) => post({
+    url: `/addVedio`,
     data: values,
     headers: { 'token': 'fadeToken' },
 });

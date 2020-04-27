@@ -3,33 +3,37 @@
  */
 import React from 'react';
 import { Table, Button, Row, Col, Card } from 'antd';
-import { listAgents } from '../../axios';
+import { listVedios } from '../../axios';
 import BreadcrumbCustom from '../BreadcrumbCustom';
+import { Link } from 'react-router-dom';
 
 const columns = [{
-    title: 'ID',
-    dataIndex: 'ID',
-    width: 100,
-    // render: (text, record) => <a href={record.url} target="_blank" rel="noopener noreferrer">{text}</a>,
-}, {
-    title: '佣金比例',
-    dataIndex: 'Rate',
+    title: '视频类别',
+    dataIndex: 'VedioType',
     width: 80,
 }, {
-    title: '佣金抽成',
-    dataIndex: 'Total',
+    title: '视频子类别',
+    dataIndex: 'SubVedioType',
     width: 80,
 }, {
-    title: '注册时间',
+    title: '标题',
+    dataIndex: 'Title',
+    width: 80,
+}, {
+    title: '发布时间',
     dataIndex: 'CreatedAt',
     width: 80,
 }, {
-    title: '余额',
-    dataIndex: 'Amount',
-    width: 200,
+    title: '播放量',
+    dataIndex: 'Views',
+    width: 80,
+}, {
+    title: '收藏量',
+    dataIndex: 'Collects',
+    width: 80,
 }];
 
-class Agent extends React.Component {
+class VedioList extends React.Component {
     state = {
         loading: false,
         data: [],
@@ -44,7 +48,7 @@ class Agent extends React.Component {
 
     start = () => {
         this.setState({ loading: true });
-        listAgents(this.state.pageNo, this.state.pageSize).then(({ data, total }) => {
+        listVedios(this.state.pageNo, this.state.pageSize).then(({ data, total }) => {
             this.setState({
                 data: data,
                 loading: false,
@@ -55,7 +59,8 @@ class Agent extends React.Component {
 
     pagination = (pageNo) => {
         this.setState({ pageNo: pageNo, loading: true });
-        listAgents(pageNo, this.state.pageSize).then(({ data, total }) => {
+        console.log(pageNo);
+        listVedios(pageNo, this.state.pageSize).then(({ data, total }) => {
             this.setState({
                 data: data,
                 loading: false,
@@ -68,12 +73,14 @@ class Agent extends React.Component {
         const { pageNo, pageSize, total, loading } = this.state;
         return (
             <div className="gutter-example">
-                <BreadcrumbCustom first="用户管理" second="用户" />
+                <BreadcrumbCustom first="视频管理" second="视频" />
                 <Row gutter={16}>
                     <Col className="gutter-row" md={24}>
                         <div className="gutter-box">
-                            <Card title="用户列表" bordered={false}>
+                            <Card title="视频列表" bordered={false}>
                                 <div style={{ marginBottom: 16 }}>
+                                    <Link to={'/app/vedio/add'}><Button
+                                        type="primary">添加视频</Button></Link>
                                     <Button type="primary" onClick={this.start}
                                             disabled={loading} loading={loading}
                                     >Reload</Button>
@@ -97,4 +104,4 @@ class Agent extends React.Component {
     }
 }
 
-export default Agent;
+export default VedioList;

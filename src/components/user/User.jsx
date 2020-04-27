@@ -15,17 +15,30 @@ const columns = [{
     dataIndex: 'Phone',
     width: 80,
 }, {
-    title: '用户名',
-    dataIndex: 'Username',
+    title: '邀请码',
+    dataIndex: 'InviteCode',
     width: 80,
 }, {
     title: '注册时间',
     dataIndex: 'CreatedAt',
-    width: 80,
+    width: 120,
 }, {
     title: '余额',
     dataIndex: 'Amount',
-    width: 200,
+    width: 80,
+}, {
+    title: '邀请人数',
+    dataIndex: 'InviteNumber',
+    width: 80,
+}, {
+    title: '状态',
+    dataIndex: 'Status',
+    width: 80,
+    render: (text) => <span>{text == 0 ? '非VIP' : 'VIP'}</span>,
+}, {
+    title: '到期时间',
+    dataIndex: 'VipEndTime',
+    width: 120,
 }];
 
 class User extends React.Component {

@@ -26,14 +26,10 @@ import AuthBasic from './auth/Basic';
 import RouterEnter from './auth/RouterEnter';
 import MapUi from './ui/map';
 import User from './user/User';
-import Agent from './user/Agent';
-import Lottery from './lottery/Lottery';
-import LotteryResults from './lottery/LotteryResults';
-import PreLotteryResults from './lottery/PreLotteryResults';
-import AddPreLotteryResult from './lottery/AddPreLotteryResult';
+import VedioList from './vedio/VedioList';
+import AddVedio from './vedio/AddVedio';
 import Deposit from './asset/Deposit';
 import Withdraw from './asset/Withdraw';
-import Bet from './bet/Bet';
 
 const WysiwygBundle = Loadable({
     // 按需加载富文本配置
@@ -65,12 +61,8 @@ export default {
     WysiwygBundle,
     MapUi,
     User,
-    Agent,
-    Lottery,
-    LotteryResults,
-    PreLotteryResults,
-    AddPreLotteryResult,
+    VedioList,
+    AddVedio,
     Deposit,
     Withdraw,
-    Bet,
 };

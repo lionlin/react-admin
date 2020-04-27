@@ -6,7 +6,7 @@ import BreadcrumbCustom from '../BreadcrumbCustom';
 const columns = [{
     title: 'ID',
     dataIndex: 'ID',
-    width: 100,
+    width: 80,
 }, {
     title: '账号',
     dataIndex: 'User.Phone',
@@ -22,7 +22,12 @@ const columns = [{
 }, {
     title: '充值金额',
     dataIndex: 'Amount',
-    width: 200,
+    width: 80,
+}, {
+    title: '状态',
+    dataIndex: 'Status',
+    width: 80,
+    render: (text) => <span>{text == 0 ? '未完成' : '完成'}</span>,
 }];
 
 class Deposit extends React.Component {
