@@ -1,37 +1,7 @@
 import React from 'react';
 import { Table, Button, Row, Col, Card, Form, Input } from 'antd';
-import { listWithdraws } from '../../axios';
+import { finishWithdraws, listWithdraws } from '../../axios';
 import BreadcrumbCustom from '../BreadcrumbCustom';
-
-const columns = [{
-    title: 'ID',
-    dataIndex: 'ID',
-    width: 80,
-}, {
-    title: '账号',
-    dataIndex: 'User.Phone',
-    width: 80,
-}, {
-    title: '银行',
-    dataIndex: 'Bank',
-    width: 80,
-}, {
-    title: '银行账号',
-    dataIndex: 'BankCardNo',
-    width: 80,
-}, {
-    title: '持卡人',
-    dataIndex: 'Owner',
-    width: 80,
-}, {
-    title: '充值时间',
-    dataIndex: 'CreatedAt',
-    width: 80,
-}, {
-    title: '充值金额',
-    dataIndex: 'Amount',
-    width: 80,
-}];
 
 class Withdraw extends React.Component {
     state = {
@@ -40,6 +10,47 @@ class Withdraw extends React.Component {
         pageSize: 10,
         phone: '',
         total: 0,
+    };
+
+    columns = [{
+        title: '账号',
+        dataIndex: 'User.Phone',
+        width: 80,
+    }, {
+        title: '银行',
+        dataIndex: 'Bank',
+        width: 80,
+    }, {
+        title: '银行账号',
+        dataIndex: 'BankCardNo',
+        width: 150,
+    }, {
+        title: '持卡人',
+        dataIndex: 'Owner',
+        width: 80,
+    }, {
+        title: '充值时间',
+        dataIndex: 'CreatedAt',
+        width: 150,
+    }, {
+        title: '充值金额',
+        dataIndex: 'Amount',
+        width: 80,
+    }, {
+        title: '状态',
+        dataIndex: 'Status',
+        width: 80,
+        render: (status) => status == '1' ? '已完成' : '未完成',
+    }, {
+        title: '操作',
+        key: 'action',
+        render: (text, record) => <Button onClick={() => this.handleFinish(record.ID)}>完成</Button>,
+    }];
+
+    handleFinish = id => {
+        finishWithdraws(id).then(res => {
+            this.start(this.state.pageNo, this.state.pageSize, this.state.phone);
+        });
     };
 
     getFields() {
@@ -110,15 +121,16 @@ class Withdraw extends React.Component {
                                         </Row>
                                     </Form>
                                 </div>
-                                <Table columns={columns} dataSource={this.state.data} pagination={{
-                                    pageNo: pageNo,
-                                    pageSize: pageSize,
-                                    total: total,
-                                    onChange: this.pagination,
-                                    showTotal: ((total) => {
-                                        return `共 ${total} 条`;
-                                    }),
-                                }} />
+                                <Table columns={this.columns} dataSource={this.state.data}
+                                       pagination={{
+                                           pageNo: pageNo,
+                                           pageSize: pageSize,
+                                           total: total,
+                                           onChange: this.pagination,
+                                           showTotal: ((total) => {
+                                               return `共 ${total} 条`;
+                                           }),
+                                       }} />
                             </Card>
                         </div>
                     </Col>

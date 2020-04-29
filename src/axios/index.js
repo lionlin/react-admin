@@ -7,55 +7,62 @@ import * as config from './config';
 
 export const getBbcNews = () => get({ url: config.NEWS_BBC });
 
+const token = localStorage.getItem('token');
+
 export const listUsers = (pageNo, pageSize) => get({
     url: `/listUsers?pageSize=${pageSize}&pageNo=${pageNo}`,
-    headers: { 'token': 'fadeToken' },
+    headers: { 'token': token },
 });
 
 export const listAgents = (pageNo, pageSize) => get({
     url: `/listAgents?pageSize=${pageSize}&pageNo=${pageNo}`,
-    headers: { 'token': 'fadeToken' },
+    headers: { 'token': token },
 });
 
 export const listVedios = (pageNo, pageSize) => get({
     url: `/listVedios?pageSize=${pageSize}&pageNo=${pageNo}`,
-    headers: { 'token': 'fadeToken' },
+    headers: { 'token': token },
 });
 
 export const listLotteryResults = (pageNo, pageSize, lotteryType) => get({
     url: `/listLotteryResults?pageSize=${pageSize}&pageNo=${pageNo}&lotteryType=${lotteryType}`,
-    headers: { 'token': 'fadeToken' },
+    headers: { 'token': token },
 });
 
 export const listPrivateLotteryResults = (pageNo, pageSize) => get({
     url: `/listPrivateLotteryResults?pageSize=${pageSize}&pageNo=${pageNo}`,
-    headers: { 'token': 'fadeToken' },
+    headers: { 'token': token },
 });
 
 export const listPreLotteryResults = (pageNo, pageSize, lotteryType) => get({
     url: `/listPreLotteryResults?pageSize=${pageSize}&pageNo=${pageNo}&lotteryType=${lotteryType}`,
-    headers: { 'token': 'fadeToken' },
+    headers: { 'token': token },
 });
 
 export const addVedio = (values) => post({
     url: `/addVedio`,
     data: values,
-    headers: { 'token': 'fadeToken' },
+    headers: { 'token': token },
 });
 
 export const listDeposits = (pageNo, pageSize, phone) => get({
     url: `/listDeposits?pageSize=${pageSize}&pageNo=${pageNo}&phone=${phone}`,
-    headers: { 'token': 'fadeToken' },
+    headers: { 'token': token },
 });
 
 export const listWithdraws = (pageNo, pageSize, phone) => get({
     url: `/listWithdraws?pageSize=${pageSize}&pageNo=${pageNo}&phone=${phone}`,
-    headers: { 'token': 'fadeToken' },
+    headers: { 'token': token },
+});
+
+export const finishWithdraws = (id) => get({
+    url: `/finishWithdraws?id=${id}`,
+    headers: { 'token': token },
 });
 
 export const listBets = (pageNo, pageSize, phone) => get({
     url: `/listBets?pageSize=${pageSize}&pageNo=${pageNo}&phone=${phone}`,
-    headers: { 'token': 'fadeToken' },
+    headers: { 'token': token },
 });
 
 export const npmDependencies = () =>
@@ -93,6 +100,12 @@ export const gitOauthInfo = access_token =>
 
 // easy-mock数据交互
 // 管理员权限获取
-export const admin = () => get({ url: config.MOCK_AUTH_ADMIN });
+export const login = (username, password) => post({
+    url: `/login`,
+    data: {
+        username: username,
+        password: password,
+    },
+});
 // 访问权限获取
 export const guest = () => get({ url: config.MOCK_AUTH_VISITOR });
