@@ -30,6 +30,7 @@ import VedioList from './vedio/VedioList';
 import AddVedio from './vedio/AddVedio';
 import Deposit from './asset/Deposit';
 import Withdraw from './asset/Withdraw';
+import QueryParams from './extension/QueryParams';
 
 const WysiwygBundle = Loadable({
     // 按需加载富文本配置
@@ -56,6 +57,7 @@ export default {
     Gallery,
     BasicAnimations,
     ExampleAnimations,
+    QueryParams,
     AuthBasic,
     RouterEnter,
     WysiwygBundle,

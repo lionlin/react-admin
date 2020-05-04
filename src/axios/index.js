@@ -1,7 +1,3 @@
-/**
- * Created by hao.cheng on 2017/4/16.
- */
-import axios from 'axios';
 import { get, post } from './tools';
 import * as config from './config';
 
@@ -10,102 +6,46 @@ export const getBbcNews = () => get({ url: config.NEWS_BBC });
 const token = localStorage.getItem('token');
 
 export const listUsers = (pageNo, pageSize) => get({
-    url: `/listUsers?pageSize=${pageSize}&pageNo=${pageNo}`,
-    headers: { 'token': token },
-});
-
-export const listAgents = (pageNo, pageSize) => get({
-    url: `/listAgents?pageSize=${pageSize}&pageNo=${pageNo}`,
+    url: `/admin/listUsers?pageSize=${pageSize}&pageNo=${pageNo}`,
     headers: { 'token': token },
 });
 
 export const listVedios = (pageNo, pageSize) => get({
-    url: `/listVedios?pageSize=${pageSize}&pageNo=${pageNo}`,
-    headers: { 'token': token },
-});
-
-export const listLotteryResults = (pageNo, pageSize, lotteryType) => get({
-    url: `/listLotteryResults?pageSize=${pageSize}&pageNo=${pageNo}&lotteryType=${lotteryType}`,
-    headers: { 'token': token },
-});
-
-export const listPrivateLotteryResults = (pageNo, pageSize) => get({
-    url: `/listPrivateLotteryResults?pageSize=${pageSize}&pageNo=${pageNo}`,
-    headers: { 'token': token },
-});
-
-export const listPreLotteryResults = (pageNo, pageSize, lotteryType) => get({
-    url: `/listPreLotteryResults?pageSize=${pageSize}&pageNo=${pageNo}&lotteryType=${lotteryType}`,
+    url: `/admin/listVedios?pageSize=${pageSize}&pageNo=${pageNo}`,
     headers: { 'token': token },
 });
 
 export const addVedio = (values) => post({
-    url: `/addVedio`,
+    url: `/admin/addVedio`,
     data: values,
     headers: { 'token': token },
 });
 
 export const listDeposits = (pageNo, pageSize, phone) => get({
-    url: `/listDeposits?pageSize=${pageSize}&pageNo=${pageNo}&phone=${phone}`,
+    url: `/admin/listDeposits?pageSize=${pageSize}&pageNo=${pageNo}&phone=${phone}`,
     headers: { 'token': token },
 });
 
 export const listWithdraws = (pageNo, pageSize, phone) => get({
-    url: `/listWithdraws?pageSize=${pageSize}&pageNo=${pageNo}&phone=${phone}`,
+    url: `/admin/listWithdraws?pageSize=${pageSize}&pageNo=${pageNo}&phone=${phone}`,
     headers: { 'token': token },
 });
 
 export const finishWithdraws = (id) => get({
-    url: `/finishWithdraws?id=${id}`,
+    url: `/admin/finishWithdraws?id=${id}`,
     headers: { 'token': token },
 });
 
-export const listBets = (pageNo, pageSize, phone) => get({
-    url: `/listBets?pageSize=${pageSize}&pageNo=${pageNo}&phone=${phone}`,
+export const adminPayOrderCallBack = (id) => get({
+    url: `/admin/adminPayOrderCallBack?id=${id}`,
     headers: { 'token': token },
 });
 
-export const npmDependencies = () =>
-    axios
-        .get('./npm.json')
-        .then(res => res.data)
-        .catch(err => console.log(err));
-
-export const weibo = () =>
-    axios
-        .get('./weibo.json')
-        .then(res => res.data)
-        .catch(err => console.log(err));
-
-export const gitOauthLogin = () =>
-    get({
-        url: `${
-            config.GIT_OAUTH
-            }/authorize?client_id=792cdcd244e98dcd2dee&redirect_uri=http://localhost:3006/&scope=user&state=reactAdmin`,
-    });
-export const gitOauthToken = code =>
-    post({
-        url: `https://cors-anywhere.herokuapp.com/${config.GIT_OAUTH}/access_token`,
-        data: {
-            client_id: '792cdcd244e98dcd2dee',
-            client_secret: '81c4ff9df390d482b7c8b214a55cf24bf1f53059',
-            redirect_uri: 'http://localhost:3006/',
-            state: 'reactAdmin',
-            code,
-        },
-    });
-// {headers: {Accept: 'application/json'}}
-export const gitOauthInfo = access_token =>
-    get({ url: `${config.GIT_USER}access_token=${access_token}` });
-
-// easy-mock数据交互
 // 管理员权限获取
 export const login = (username, password) => post({
-    url: `/login`,
+    url: `/admin/login`,
     data: {
         username: username,
         password: password,
     },
 });
-// 访问权限获取
-export const guest = () => get({ url: config.MOCK_AUTH_VISITOR });

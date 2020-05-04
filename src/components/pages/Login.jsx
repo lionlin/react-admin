@@ -2,7 +2,7 @@
  * Created by hao.cheng on 2017/4/16.
  */
 import React from 'react';
-import { Form, Icon, Input, Button } from 'antd';
+import { Form, Icon, Input, Button, notification } from 'antd';
 import { PwaInstaller } from '../widget';
 import { connectAlita } from 'redux-alita';
 import { login } from '../../axios';
@@ -22,16 +22,27 @@ class Login extends React.Component {
         // }
     }
 
+    openNotificationWithIcon = (type, message, description) => {
+        notification[type]({
+            message: message,
+            description: description,
+        });
+    };
+
     handleSubmit = (e) => {
         e.preventDefault();
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 console.log('Received values of form: ', values);
                 const { setAlitaState, history } = this.props;
-                login(values.username, values.password).then(token => {
-                    localStorage.setItem('token', token);
-                    setAlitaState({ stateName: 'auth', data: { login: true, token: token } });
-                    history.push('/');
+                login(values.username, values.password).then(({ code, message, data }) => {
+                    if (code === 0) {
+                        localStorage.setItem('token', data);
+                        setAlitaState({ stateName: 'auth', data: { login: true, token: data } });
+                        history.push('/');
+                    } else {
+                        this.openNotificationWithIcon('error', '登录失败', message);
+                    }
                 });
             }
         });

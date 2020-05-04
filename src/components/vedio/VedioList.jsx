@@ -10,27 +10,21 @@ import { Link } from 'react-router-dom';
 const columns = [{
     title: '视频类别',
     dataIndex: 'VedioType',
-    width: 80,
 }, {
     title: '视频子类别',
     dataIndex: 'SubVedioType',
-    width: 80,
 }, {
     title: '标题',
     dataIndex: 'Title',
-    width: 80,
 }, {
     title: '发布时间',
     dataIndex: 'CreatedAt',
-    width: 80,
 }, {
     title: '播放量',
     dataIndex: 'Views',
-    width: 80,
 }, {
     title: '收藏量',
     dataIndex: 'Collects',
-    width: 80,
 }];
 
 class VedioList extends React.Component {

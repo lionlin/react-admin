@@ -1,34 +1,7 @@
 import React from 'react';
 import { Table, Button, Row, Col, Card, Form, Input } from 'antd';
-import { listDeposits } from '../../axios';
+import { adminPayOrderCallBack, finishWithdraws, listDeposits } from '../../axios';
 import BreadcrumbCustom from '../BreadcrumbCustom';
-
-const columns = [{
-    title: 'ID',
-    dataIndex: 'ID',
-    width: 80,
-}, {
-    title: '账号',
-    dataIndex: 'User.Phone',
-    width: 80,
-}, {
-    title: '充值类型',
-    dataIndex: 'Type',
-    width: 80,
-}, {
-    title: '充值时间',
-    dataIndex: 'CreatedAt',
-    width: 80,
-}, {
-    title: '充值金额',
-    dataIndex: 'Amount',
-    width: 80,
-}, {
-    title: '状态',
-    dataIndex: 'Status',
-    width: 80,
-    render: (text) => <span>{text == 0 ? '未完成' : '完成'}</span>,
-}];
 
 class Deposit extends React.Component {
     state = {
@@ -37,6 +10,37 @@ class Deposit extends React.Component {
         pageSize: 10,
         phone: '',
         total: 0,
+    };
+
+    columns = [{
+        title: 'ID',
+        dataIndex: 'ID',
+    }, {
+        title: '账号',
+        dataIndex: 'UserID',
+    }, {
+        title: '充值类型',
+        dataIndex: 'Type',
+    }, {
+        title: '充值时间',
+        dataIndex: 'CreatedAt',
+    }, {
+        title: '充值金额',
+        dataIndex: 'Amount',
+    }, {
+        title: '状态',
+        dataIndex: 'Status',
+        render: (text) => <span>{text == 0 ? '未完成' : '完成'}</span>,
+    }, {
+        title: '操作',
+        key: 'action',
+        render: (text, record) => <Button onClick={() => this.handleFinish(record.ID)}>手动完成</Button>,
+    }];
+
+    handleFinish = id => {
+        adminPayOrderCallBack(id).then(res => {
+            this.start(this.state.pageNo, this.state.pageSize, this.state.phone);
+        });
     };
 
     getFields() {
@@ -107,7 +111,7 @@ class Deposit extends React.Component {
                                         </Row>
                                     </Form>
                                 </div>
-                                <Table columns={columns} dataSource={this.state.data} pagination={{
+                                <Table columns={this.columns} dataSource={this.state.data} pagination={{
                                     pageNo: pageNo,
                                     pageSize: pageSize,
                                     total: total,

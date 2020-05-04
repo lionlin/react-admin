@@ -111,6 +111,19 @@ export default {
         //         },
         //     ],
         // },
+        // {
+        //     key: '/app/extension',
+        //     title: '功能扩展',
+        //     icon: 'bars',
+        //     subs: [
+        //         {
+        //             key: '/app/extension/queryParams',
+        //             title: '问号形式参数',
+        //             component: 'QueryParams',
+        //             query: '?param1=1&param2=2',
+        //         },
+        //     ],
+        // },
     ],
     others: [
         { key: '/app/vedio/add', title: '添加视频', component: 'AddVedio' },
