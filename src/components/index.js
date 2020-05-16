@@ -1,7 +1,3 @@
-/**
- * 路由组件出口文件
- * yezi 2018年6月24日
- */
 import Loadable from 'react-loadable';
 import Loading from './widget/Loading';
 import BasicForm from './forms/BasicForm';
@@ -27,6 +23,8 @@ import RouterEnter from './auth/RouterEnter';
 import MapUi from './ui/map';
 import User from './user/User';
 import VedioList from './vedio/VedioList';
+import SystemConfig from './system_config/SystemConfig';
+import UpdateSystemConfig from './system_config/UpdateSystemConfig';
 import AddVedio from './vedio/AddVedio';
 import Deposit from './asset/Deposit';
 import Withdraw from './asset/Withdraw';
@@ -67,4 +65,6 @@ export default {
     AddVedio,
     Deposit,
     Withdraw,
+    SystemConfig,
+    UpdateSystemConfig,
 };

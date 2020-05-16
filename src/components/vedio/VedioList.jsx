@@ -1,31 +1,8 @@
-/**
- * Created by hao.cheng on 2017/4/16.
- */
 import React from 'react';
 import { Table, Button, Row, Col, Card } from 'antd';
-import { listVedios } from '../../axios';
+import { advisedVedio, listVedios } from '../../axios';
 import BreadcrumbCustom from '../BreadcrumbCustom';
 import { Link } from 'react-router-dom';
-
-const columns = [{
-    title: '视频类别',
-    dataIndex: 'VedioType',
-}, {
-    title: '视频子类别',
-    dataIndex: 'SubVedioType',
-}, {
-    title: '标题',
-    dataIndex: 'Title',
-}, {
-    title: '发布时间',
-    dataIndex: 'CreatedAt',
-}, {
-    title: '播放量',
-    dataIndex: 'Views',
-}, {
-    title: '收藏量',
-    dataIndex: 'Collects',
-}];
 
 class VedioList extends React.Component {
     state = {
@@ -36,9 +13,44 @@ class VedioList extends React.Component {
         total: 0,
     };
 
+    columns = [{
+        title: '视频类别',
+        dataIndex: 'VedioType',
+    }, {
+        title: '视频子类别',
+        dataIndex: 'SubVedioType',
+    }, {
+        title: '标题',
+        dataIndex: 'Title',
+    }, {
+        title: '发布时间',
+        dataIndex: 'CreatedAt',
+    }, {
+        title: '播放量',
+        dataIndex: 'Views',
+    }, {
+        title: '收藏量',
+        dataIndex: 'Collects',
+    }, {
+        title: '推荐',
+        dataIndex: 'AdvisedShow',
+        render: (text, record) => record.AdvisedShow ? '推荐' : '未推荐',
+    }, {
+        title: '操作',
+        key: 'action',
+        render: (text, record) => <Button onClick={() => this.handleFinish(record.ID)}>推荐</Button>,
+    }];
+
+
     componentDidMount() {
         this.start();
     }
+
+    handleFinish = id => {
+        advisedVedio(id).then(res => {
+            this.start();
+        });
+    };
 
     start = () => {
         this.setState({ loading: true });
@@ -79,7 +91,7 @@ class VedioList extends React.Component {
                                             disabled={loading} loading={loading}
                                     >Reload</Button>
                                 </div>
-                                <Table columns={columns} dataSource={this.state.data} pagination={{
+                                <Table columns={this.columns} dataSource={this.state.data} pagination={{
                                     pageNo: pageNo,
                                     pageSize: pageSize,
                                     loading: loading,

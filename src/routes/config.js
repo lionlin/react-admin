@@ -11,6 +11,14 @@ export default {
             ],
         },
         {
+            key: '/app/system_config',
+            title: '系统配置',
+            icon: 'trophy',
+            subs: [
+                { key: '/app/system_config/list', title: '系统配置', component: 'SystemConfig' },
+            ],
+        },
+        {
             key: '/app/vedio',
             title: '视频管理',
             icon: 'trophy',
@@ -127,5 +135,6 @@ export default {
     ],
     others: [
         { key: '/app/vedio/add', title: '添加视频', component: 'AddVedio' },
+        { key: '/app/system_config/update', title: '更新系统配置', component: 'UpdateSystemConfig' },
     ], // 非菜单相关路由
 };
