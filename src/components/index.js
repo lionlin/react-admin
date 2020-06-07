@@ -28,7 +28,15 @@ import UpdateSystemConfig from './system_config/UpdateSystemConfig';
 import AddVedio from './vedio/AddVedio';
 import Deposit from './asset/Deposit';
 import Withdraw from './asset/Withdraw';
+import DepositChannel from './asset/DepositChannel';
+import UpdateDepositChannel from './asset/UpdateDepositChannel';
 import QueryParams from './extension/QueryParams';
+import AddVedioType from './vedio_type/AddVedioType';
+import VedioTypeList from './vedio_type/VedioTypeList';
+import UpdateVedioType from './vedio_type/UpdateVedioType';
+import LiveVedioList from './live_vedio/LiveVedioList';
+import AddLiveVedio from './live_vedio/AddLiveVedio';
+import UpdateLiveVedio from './live_vedio/UpdateLiveVedio';
 
 const WysiwygBundle = Loadable({
     // 按需加载富文本配置
@@ -67,4 +75,12 @@ export default {
     Withdraw,
     SystemConfig,
     UpdateSystemConfig,
+    DepositChannel,
+    UpdateDepositChannel,
+    VedioTypeList,
+    AddVedioType,
+    UpdateVedioType,
+    LiveVedioList,
+    AddLiveVedio,
+    UpdateLiveVedio,
 };

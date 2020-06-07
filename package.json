@@ -143,5 +143,5 @@
   "devDependencies": {
     "eslint-plugin-react-hooks": "^1.6.0"
   },
-  "proxy": "http://xhg.zcrsc.com:8000"
+  "proxy": "http://xhg.zcrsc.com"
 }

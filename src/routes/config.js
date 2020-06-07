@@ -27,12 +27,29 @@ export default {
             ],
         },
         {
+            key: '/app/live_vedio',
+            title: '直播视频管理',
+            icon: 'trophy',
+            subs: [
+                { key: '/app/live_vedio/list', title: '直播视频列表', component: 'LiveVedioList' },
+            ],
+        },
+        {
+            key: '/app/vedio_type',
+            title: '视频类别管理',
+            icon: 'trophy',
+            subs: [
+                { key: '/app/vedio_type/list', title: '视频类别列表', component: 'VedioTypeList' },
+            ],
+        },
+        {
             key: '/app/asset',
             title: '充值提现',
             icon: 'bank',
             subs: [
                 { key: '/app/asset/deposit', title: '充值管理', component: 'Deposit' },
                 { key: '/app/asset/withdraw', title: '提现管理', component: 'Withdraw' },
+                { key: '/app/asset/depositChannel', title: '充值渠道', component: 'DepositChannel' },
             ],
         },
         // {
@@ -135,6 +152,11 @@ export default {
     ],
     others: [
         { key: '/app/vedio/add', title: '添加视频', component: 'AddVedio' },
+        { key: '/app/vedio_type/add', title: '添加视频类别', component: 'AddVedioType' },
+        { key: '/app/vedio_type/update', title: '更新视频类别', component: 'UpdateVedioType' },
+        { key: '/app/live_vedio/add', title: '添加直播视频', component: 'AddLiveVedio' },
+        { key: '/app/live_vedio/update', title: '更新直播视频', component: 'UpdateLiveVedio' },
         { key: '/app/system_config/update', title: '更新系统配置', component: 'UpdateSystemConfig' },
+        { key: '/app/asset/updateDepositChannel', title: '更新充值渠道', component: 'UpdateDepositChannel' },
     ], // 非菜单相关路由
 };
